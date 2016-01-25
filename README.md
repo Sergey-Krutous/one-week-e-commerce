@@ -4,3 +4,7 @@ The application reprsents a simple e-commerce platform that could be created in 
 ## Ruby version
 
 This application was developed with Ruby version 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux].
+
+## How to test
+
+Execute `rspec -c -f d` to run the test suite.
