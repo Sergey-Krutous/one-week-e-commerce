@@ -8,3 +8,8 @@ This application was developed with Ruby version 2.2.1p85 (2015-02-26 revision 4
 ## How to test
 
 Execute `rspec -c -f d` to run the test suite.
+
+## Notes
+
+Awesome Nested Set gem was selected as the most popular gem in "Active Record Nesting" section of the Ruby Toolbox: https://www.ruby-toolbox.com/categories/Active_Record_Nesting.
+

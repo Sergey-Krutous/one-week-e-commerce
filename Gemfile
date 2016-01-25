@@ -18,13 +18,10 @@ gem 'turbolinks'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# support for tree structures, e.g. for categories
+gem 'awesome_nested_set', '~> 3.0', '>= 3.0.2'
+
 group :development, :test do
-end
-
-group :development do
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
   # Using RSpec as main testing framework  
   gem 'rspec-rails', '~> 3.3', '>= 3.3.3'
   
@@ -36,5 +33,10 @@ group :development do
   
   #Using Capybara for integration testing
   gem 'capybara', '~> 2.5'
+end
+
+group :development do
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
 
