@@ -1,0 +1,8 @@
+<% @header = "Editing product ##{@product.id}" %>
+
+<%= form_for(@product, url: admin_product_path(@product), html: {method: :put, class: "form-horizontal"}) do |f| %>
+  <%= render 'form', f: f %>
+<% end %>
+
+<%= admin_link_to_show @product%>
+<%= admin_link_to_index_of "product" %>

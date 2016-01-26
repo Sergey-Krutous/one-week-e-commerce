@@ -1,0 +1,29 @@
+<% @header = "Product ##{@product.id}" %>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">Title</th>
+      <td><%= @product.title %></td>
+    </tr>
+    <tr>
+      <th scope="row">URL slug</th>
+      <td><%= @product.slug %></td>
+    </tr>
+    <tr>
+      <th scope="row">Description</th>
+      <td><%= @product.description %></td>
+    </tr>
+    <tr>
+      <th scope="row">Price</th>
+      <td><%= @product.price %></td>
+    </tr>
+    <tr>
+      <th scope="row">Stock quantity</th>
+      <td><%= @product.quantity %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= admin_link_to_edit @product %>
+<%= admin_link_to_index_of "product" %>

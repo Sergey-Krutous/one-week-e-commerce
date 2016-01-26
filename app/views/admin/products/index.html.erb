@@ -1,0 +1,33 @@
+<% @header = "Product list" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>URL slug</th>
+      <th>Stock quantity</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.title %> </td>
+        <td><%= product.slug %> </td>
+        <td><%= product.quantity %> </td>
+        <td>
+          <%= admin_link_to_show product %>
+          <%= admin_link_to_edit product %>
+          <%= admin_link_to_delete product %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @products.count == 0 %>
+<h4>The list is empty.</h4>
+<% end %>
+
+<%= admin_link_to_new "product" %>

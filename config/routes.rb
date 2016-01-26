@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get 'categories/:parent_id/children', to: 'categories#index', as: 'child_categories'
     get 'categories/:parent_id/children/new', to: 'categories#new', as: 'new_child_category'
     post 'categories/:parent_id/children', to: 'categories#create', as: nil
+    
+    resources :products
   end
 
   # Example of regular route:

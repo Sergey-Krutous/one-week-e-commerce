@@ -25,6 +25,10 @@
   </tbody>
 </table>
 
+<% if @categories.count == 0 %>
+<h4>The list is empty.</h4>
+<% end %>
+
 <% if @parent_category.nil? %>
 <%= admin_link_to_new "category" %>
 <% else %>
