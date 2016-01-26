@@ -1,10 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Admin::ProductsController, type: :controller do
-  let(:duvet) { FactoryGirl.create :duvet }
+  let(:womens_category) { FactoryGirl.create :womens_category }
+  let(:mens_category) { FactoryGirl.create :mens_category }
+  let(:duvet) do
+    product = FactoryGirl.create :duvet
+    product.categories << mens_category
+    product
+  end
 
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:womens_bag)
+    FactoryGirl.attributes_for(:womens_bag).merge({ category_ids: [womens_category.id] })
   }
   
   let(:invalid_attributes) {
@@ -59,15 +65,20 @@ RSpec.describe Admin::ProductsController, type: :controller do
         }.to change(Product, :count).by(1)
       end
 
-      it "assigns a newly created product as @product" do
-        post :create, {:product => valid_attributes}, valid_session
-        expect(assigns(:product)).to be_a(Product)
-        expect(assigns(:product)).to be_persisted
-      end
-
-      it "redirects to the created product" do
-        post :create, {:product => valid_attributes}, valid_session
-        expect(response).to redirect_to(admin_product_url(Product.last))
+      context "and" do
+        before(:each) { post :create, {:product => valid_attributes}, valid_session }
+        it "assigns a newly created product as @product" do
+          expect(assigns(:product)).to be_a(Product)
+          expect(assigns(:product)).to be_persisted
+        end
+  
+        it "redirects to the created product" do
+          expect(response).to redirect_to(admin_product_url(Product.last))
+        end
+        
+        it "assigns product to category" do
+          expect(Product.last.categories).to include(womens_category)
+        end
       end
     end
 
@@ -91,28 +102,35 @@ RSpec.describe Admin::ProductsController, type: :controller do
         attributes[:price] += 1.23
         attributes[:quantity] += 1
         attributes[:title] += "!"
+        attributes[:category_ids] = [womens_category.id]
         attributes
       }
 
+      before(:each) do
+        put :update, {:id => duvet.to_param, :product => new_attributes}, valid_session
+        duvet.reload
+      end
+      
       it "updates the requested product" do
-        product = duvet
-        put :update, {:id => product.to_param, :product => new_attributes}, valid_session
-        product.reload
-        expect(product.price).to eq(new_attributes[:price])
-        expect(product.quantity).to eq(new_attributes[:quantity])
-        expect(product.title).to eq(new_attributes[:title])
+        expect(duvet.price).to eq(new_attributes[:price])
+        expect(duvet.quantity).to eq(new_attributes[:quantity])
+        expect(duvet.title).to eq(new_attributes[:title])
       end
 
       it "assigns the requested product as @product" do
-        product = duvet
-        put :update, {:id => product.to_param, :product => valid_attributes}, valid_session
-        expect(assigns(:product)).to eq(product)
+        expect(assigns(:product)).to eq(duvet)
       end
 
       it "redirects to the product" do
-        product = Product.create! valid_attributes
-        put :update, {:id => product.to_param, :product => valid_attributes}, valid_session
-        expect(response).to redirect_to(admin_product_url(product))
+        expect(response).to redirect_to(admin_product_url(duvet))
+      end
+      
+      it "assigns product to category" do
+        expect(duvet.categories).to include(womens_category)
+      end
+      
+      it "removes category from product" do
+        expect(duvet.categories).not_to include(mens_category)
       end
     end
 

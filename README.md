@@ -17,7 +17,7 @@ Execute `rspec -c -f d` to run the test suite.
 
 Awesome Nested Set gem was selected as the most popular gem in "Active Record Nesting" section of the Ruby Toolbox: https://www.ruby-toolbox.com/categories/Active_Record_Nesting.
 
-I was updating some of migrations given I was the only developer and could run `rake db:migrate:redo`. When working within a team the migrations should be incrementally added instead of modified. 
+I was updating some of migrations given I was the only developer and could run `rake db:migrate:redo` or even `rake db:reset`. When working within a team the migrations should be incrementally added instead of modified. 
 
 Admin password and login are stored as string constants in SessionsController. These must be moved to secrets file that is not version-controlled.
 

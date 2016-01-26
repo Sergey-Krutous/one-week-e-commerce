@@ -41,6 +41,13 @@
   </div>
 </div>
 <div class="form-group">
+  <%= f.label("Categories", class: "col-md-2 control-label") %>
+  <div class="col-md-3">
+    <%= select_tag 'product[category_ids][]', options_from_collection_for_select(Category.order(:lft), "id", "indent_title", @product.categories.collect{|c| c.id}), { multiple: true, class: 'form-control' } %>
+    <br/>*Hold Ctrl for multiple selection
+  </div>
+</div>
+<div class="form-group">
   <div class="col-md-offset-2 col-md-3">
     <%= submit_tag("Save", class: "btn btn-primary") %>
   </div>

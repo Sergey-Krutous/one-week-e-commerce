@@ -22,6 +22,14 @@
       <th scope="row">Stock quantity</th>
       <td><%= @product.quantity %></td>
     </tr>
+    <tr>
+      <th scope="row">Categories</th>
+      <td>
+        <% @product.categories.each do |category| %>
+        <%= admin_breadcrumb category %><br/>
+        <% end %>
+      </td>
+    </tr>
   </tbody>
 </table>
 

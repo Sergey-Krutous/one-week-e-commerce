@@ -23,19 +23,25 @@ class Admin::ProductsController < AdminController
   def create
     @product = Product.new(product_params)
 
-    if @product.save
-      redirect_to admin_product_url(@product) , notice: 'Product was successfully created.'
-    else
-      render :new
+    ActiveRecord::Base.transaction do
+      if @product.save
+        set_product_categories
+        redirect_to admin_product_url(@product) , notice: 'Product was successfully created.'
+      else
+        render :new
+      end
     end
   end
 
   # PATCH/PUT /products/1
   def update
-    if @product.update(product_params)
-      redirect_to admin_product_url(@product), notice: 'Product was successfully updated.'
-    else
-      render :edit
+    ActiveRecord::Base.transaction do
+      if @product.update(product_params)
+        set_product_categories
+        redirect_to admin_product_url(@product), notice: 'Product was successfully updated.'
+      else
+        render :edit
+      end
     end
   end
 
@@ -53,6 +59,11 @@ class Admin::ProductsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params[:product].permit(:title, :slug, :description, :price, :quantity)
+      params[:product].permit(:title, :slug, :description, :price, :quantity, :category_ids)
+    end
+    
+    def set_product_categories
+      @product.categories.clear
+      params[:product][:category_ids].each { |category_id| @product.categories << Category.find_by_id(category_id) } if params[:product] and params[:product][:category_ids]
     end
 end

@@ -17,5 +17,22 @@ RSpec.describe Category, type: :model do
     first_category = FactoryGirl.create(:womens_category)
     FactoryGirl.build(:mens_category, title: first_category.title).should_not be_valid
   end
+  
+  context "when adding product to category" do
+    let(:category) { FactoryGirl.create(:womens_bags_category) }
+    let(:product) { FactoryGirl.create(:womens_bag) }
+      
+    before(:each) do
+      category.products << product
+    end
+    
+    it "category's product list has the product" do
+      expect(Category.find_by_id(category.id).products.find_by_id(product.id)).to be_a Product
+    end
+
+    it "products's category list has the category" do
+      expect(Product.find_by_id(product.id).categories.find_by_id(category.id)).to be_a Category
+    end
+  end
 
 end
