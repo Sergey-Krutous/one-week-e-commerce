@@ -7,18 +7,15 @@ RSpec.describe Category, type: :model do
     expect(womens_bags_category.parent).to be_a Category
   end
 
-  it "should have valid factory" do
-    FactoryGirl.build(:womens_category).should be_valid
-  end
-
-  [nil, "", "a"].each do |title|
-    it "should be invalid with title: #{title.inspect}" do
-      FactoryGirl.build(:womens_category, title: title).should_not be_valid
-    end
+  include_examples "sluggable model", :womens_category
+  
+  it "should be invalid with too short title" do
+    FactoryGirl.build(:womens_category, title: "a").should_not be_valid
   end
   
   it "should be invalid with duplicate title" do
     first_category = FactoryGirl.create(:womens_category)
     FactoryGirl.build(:mens_category, title: first_category.title).should_not be_valid
   end
+
 end
