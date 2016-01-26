@@ -10,8 +10,15 @@ RSpec.describe Admin::ProductsController, type: :controller do
   let(:invalid_attributes) {
     {title: ""}
   }
+  
+  include_examples "admin controller session"
 
-  let(:valid_session) { {} }
+  it_behaves_like "requires authorization", [:new, :index] do
+    let(:request_parameters) {{}}
+  end
+  it_behaves_like "requires authorization", [:show, :edit] do
+     let(:request_parameters) {{id: FactoryGirl.create(:womens_bag).id}}
+  end
 
   describe "GET #index" do
     it "assigns all products as @products" do

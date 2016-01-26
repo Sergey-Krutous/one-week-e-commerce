@@ -8,8 +8,6 @@ RSpec.shared_examples "when parent_id is invalid" do |action|
 end
 
 RSpec.describe Admin::CategoriesController, type: :controller do
-  let(:valid_session){ {} }
-
   let(:valid_attributes) {
     FactoryGirl.attributes_for(:womens_category)
   }
@@ -17,6 +15,15 @@ RSpec.describe Admin::CategoriesController, type: :controller do
   let(:invalid_attributes) {
     {title: ""}
   }
+  
+  include_examples "admin controller session"
+  
+  it_behaves_like "requires authorization", [:show, :edit] do
+    let(:request_parameters) {{id: FactoryGirl.create(:womens_category).id}}
+  end
+  it_behaves_like "requires authorization", [:new, :index] do
+    let(:request_parameters) {{}}
+  end
 
   describe "GET #index" do
     let(:womens_category){FactoryGirl.create(:womens_category, :with_womens_category_children)}

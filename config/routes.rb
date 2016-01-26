@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+
+  get 'admin/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
+  
+  get 'sessions/new' => 'sessions#new', as: "log_in"
+  post 'sessions' => 'sessions#create'
+  delete 'sessions' => 'sessions#destroy', as: "log_out"
   
   namespace :admin do
     resources :categories
