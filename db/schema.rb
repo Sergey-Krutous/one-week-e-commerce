@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160125130841) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",                  null: false
+    t.string   "slug"
     t.integer  "parent_id"
     t.integer  "lft",        default: 0, null: false
     t.integer  "rgt",        default: 0, null: false

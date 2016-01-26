@@ -1,7 +1,8 @@
 class CreateCategories < ActiveRecord::Migration
   def change
     create_table :categories do |t|
-      t.string :title, null:false
+      t.string :title, null:false, :unique => true
+      t.string :slug
       t.references :parent, index: true
       t.integer :lft, :null => false, :index => true, :default => 0
       t.integer :rgt, :null => false, :index => true, :default => 0

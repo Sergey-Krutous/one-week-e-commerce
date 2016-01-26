@@ -1,0 +1,7 @@
+<% @header = @parent_category.nil? ? "New category" : "New child category of '#{@parent_category.title}'" %>
+
+<%= form_for(@category, url: @parent_category.nil? ? admin_categories_path : admin_child_categories_path(@parent_category), html: {method: :post, class: "form-horizontal"}) do |f| %>
+  <%= render 'form', f: f %>
+<% end %>
+
+<%= admin_link_to_siblings_of @category %>

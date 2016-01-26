@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  
+  namespace :admin do
+    resources :categories
+    
+    get 'categories/:parent_id/children', to: 'categories#index', as: 'child_categories'
+    get 'categories/:parent_id/children/new', to: 'categories#new', as: 'new_child_category'
+    post 'categories/:parent_id/children', to: 'categories#create', as: nil
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -13,7 +13,12 @@ RSpec.describe Category, type: :model do
 
   [nil, "", "a"].each do |title|
     it "should be invalid with title: #{title.inspect}" do
-        FactoryGirl.build(:womens_category, title: title).should_not be_valid
+      FactoryGirl.build(:womens_category, title: title).should_not be_valid
     end
+  end
+  
+  it "should be invalid with duplicate title" do
+    first_category = FactoryGirl.create(:womens_category)
+    FactoryGirl.build(:mens_category, title: first_category.title).should_not be_valid
   end
 end

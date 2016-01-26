@@ -1,0 +1,32 @@
+<% @header = @parent_category.nil? ? "Root category list" : "Child category list of '#{@parent_category.title}'" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>URL slug</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.title %> </td>
+        <td><%= category.slug %> </td>
+        <td>
+          <%= admin_link_to_show category %>
+          <%= admin_link_to_edit category %>
+          <%= admin_link_to_delete category %>
+          <%= link_to "Child Categories", admin_child_categories_path(category), class: "btn btn-default" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @parent_category.nil? %>
+<%= admin_link_to_new "category" %>
+<% else %>
+<%= link_to 'New Child Category', admin_new_child_category_path(@parent_category), class: "btn btn-default" %>
+<% end %>

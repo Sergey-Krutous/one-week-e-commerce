@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :womens_category, class: Category do
     title "Womens department"
+    slug "/womens"
   end
   
   trait :with_womens_category_children do
@@ -13,9 +14,16 @@ FactoryGirl.define do
   
   factory :womens_bags_category, class: Category do
     title "Womens Bags"
+    slug "/womens/bags"
   end
   
   factory :womens_dresses_category, class: Category do
     title "Dresses"
+    slug "/womens/dresses"
+  end
+  
+  factory :mens_category, class: Category do
+    title "Mens department"
+    slug "/mens"
   end
 end
