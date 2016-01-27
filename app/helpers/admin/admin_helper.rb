@@ -26,4 +26,8 @@ module Admin::AdminHelper
   def admin_link_to_delete object, parameters=nil
     link_to 'Delete', eval("admin_" + object.class.to_s.downcase + "_path(object, parameters)"), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
   end
+  
+  def admin_empty_list_check_of list
+    content_tag :h4, "The list is empty." if list.count == 0
+  end
 end

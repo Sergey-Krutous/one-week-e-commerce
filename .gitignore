@@ -17,3 +17,7 @@
 
 # Ignore spring temp files
 /spring-1000
+
+#Ignore uploaded product image files
+/public/images
+/public/uploads

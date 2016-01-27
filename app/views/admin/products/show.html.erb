@@ -30,8 +30,21 @@
         <% end %>
       </td>
     </tr>
+    <tr>
+      <th scope="row">Images</th>
+      <td>
+        <div class="row">
+          <% @product.images.each do |image| %>
+            <div style="width:100px;height:100px;float:left;margin:10px">
+              <%= image_tag image.file_url.to_s, {style: "max-height:100%;max-width:100%"} if image.file_url.present? %>
+            </div>
+          <% end %>
+        </div>
+      </td>
+    </tr>
   </tbody>
 </table>
 
 <%= admin_link_to_edit @product %>
 <%= admin_link_to_index_of "product" %>
+<%= admin_link_to_images_of @product %>

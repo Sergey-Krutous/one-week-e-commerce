@@ -17,9 +17,9 @@ Execute `rspec -c -f d` to run the test suite.
 
 Awesome Nested Set gem was selected as the most popular gem in "Active Record Nesting" section of the Ruby Toolbox: https://www.ruby-toolbox.com/categories/Active_Record_Nesting.
 
-I was updating some of migrations given I was the only developer and could run `rake db:migrate:redo` or even `rake db:reset`. When working within a team the migrations should be incrementally added instead of modified. 
+Carrierwave gem was selected as the second popular gem in "Rails File Uploads" section of the Ruby Toolbox: https://www.ruby-toolbox.com/categories/rails_file_uploads. However, the API of Carrierwave seems more intuitive to me than Paperclip API.
 
-Admin password and login are stored as string constants in SessionsController. These must be moved to secrets file that is not version-controlled.
+I was updating some of migrations given I was the only developer and could run `rake db:migrate:redo` or even `rake db:reset`. When working within a team the migrations should be incrementally added instead of modified. 
 
 ### Testing strategy
 
@@ -33,3 +33,7 @@ Routing tests are included into the test suite because:
 
 Helpers were not covered with tests because they provide very simple methods that would require tests duplicating helpers logic.
 
+## 1st priority TODOs (known issues):
+
+1) Admin password and login are stored as string constants in SessionsController. These must be moved to secrets file that is not version-controlled.
+2) Image files are not deleted from public folder

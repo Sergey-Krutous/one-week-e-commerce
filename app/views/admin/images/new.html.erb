@@ -1,0 +1,33 @@
+<% @header = "New image for '#{@product.title}'" %>
+
+<%= form_for(@image, url: admin_images_path(@product), html: {method: :post, class: "form-horizontal"}) do |f| %>
+  <% if @image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
+  
+      <ul>
+      <% @image.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <i>Please upload product images of the same aspect ratio for better user experience.</i>
+  
+  <div class="form-group">
+    <%= f.label("File to upload", class: "col-md-2 control-label") %>
+    <div class="col-md-4">
+      <%= f.file_field(:file, class: 'form-control') %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <%= submit_tag("Save", class: "btn btn-primary") %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= admin_link_back_to_images_of @product %>
+<%= admin_link_to_details_of @product %>

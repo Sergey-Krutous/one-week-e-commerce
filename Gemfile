@@ -24,6 +24,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # support for tree structures, e.g. for categories
 gem 'awesome_nested_set', '~> 3.0', '>= 3.0.2'
 
+#support for file uploads
+gem 'carrierwave', '~> 0.10.0'
+
 group :development, :test do
   # Using RSpec as main testing framework  
   gem 'rspec-rails', '~> 3.3', '>= 3.3.3'

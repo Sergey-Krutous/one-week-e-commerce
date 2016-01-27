@@ -20,14 +20,13 @@
           <%= admin_link_to_show product %>
           <%= admin_link_to_edit product %>
           <%= admin_link_to_delete product %>
+          <%= admin_link_to_images_of product %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<% if @products.count == 0 %>
-<h4>The list is empty.</h4>
-<% end %>
+<%= admin_empty_list_check_of @products %>
 
 <%= admin_link_to_new "product" %>

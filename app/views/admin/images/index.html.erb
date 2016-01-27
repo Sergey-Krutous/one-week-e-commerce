@@ -1,0 +1,30 @@
+<% @header = "Image list of product '#{@product.title}'" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @images.each do |image| %>
+      <tr>
+        <td>
+          <div style="width:200px;height:200px">
+            <%= image_tag image.file_url.to_s, {style: "max-height:100%;max-width:100%"} if image.file_url.present? %>
+          </div>
+        </td>
+        <td>
+          <%= admin_link_to_delete image %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= admin_empty_list_check_of @images %>
+
+<%= admin_link_to_new_image_of @product %>
+<%= admin_link_to_details_of @product %>
