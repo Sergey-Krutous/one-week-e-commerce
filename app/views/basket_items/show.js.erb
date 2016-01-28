@@ -1,0 +1,6 @@
+$("#basket").replaceWith("<%= escape_javascript(render template: "shared/_basket") %>");
+$("#basket").animate({fontSize: '20px'}, "slow");
+$("#basket").animate({fontSize: '14px'}, "slow");
+<% if !@error_message.blank? %>
+alert('<%= @error_message %>');
+<% end %>

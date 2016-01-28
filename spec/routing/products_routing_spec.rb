@@ -12,7 +12,7 @@ RSpec.describe ProductsController, type: :routing do
     end
 
     ["bag", "fancy-bag", "bags/bag", "fancy-bags/fancy-bag", "products/bag"].each do |slug|
-      it "routes to #index by slug" do
+      it "routes to #index by slug: #{slug}" do
         expect(:get => "/#{slug}").to route_to("products#index", slug: slug)
       end
     end

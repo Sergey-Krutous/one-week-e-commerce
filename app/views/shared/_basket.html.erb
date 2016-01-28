@@ -1,0 +1,26 @@
+<li class="dropdown" id="basket">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="fa fa-shopping-cart"></i>
+    $<%= basket.total%> (<%= basket.item_count %> items)
+    <i class="fa fa-caret-down"></i>
+  </a>
+  <ul class="dropdown-menu">
+    <% basket.items.each do |basket_item| %>
+      <li class="basket_item">
+        <% if basket_item.product.images.count > 0 %>
+          <div style="width:20px;height:20px">
+        		<%= image_tag basket_item.product.images[0].file_url.to_s, {style: "max-height:100%;max-width:100%", alt: basket_item.product.title, title: basket_item.product.title} %>
+        	</div>
+      	<% end %>
+        <%= "#{basket_item.product.title} (#{basket_item.quantity} item(s) x $#{basket_item.price})" %>
+        <%= link_to "/basket/items/#{basket_item.product_id}", method: :delete, remote: true, alt:"remove" do %>
+          <%= content_tag :i, "", class:"fa fa-times" %>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="divider"></li>
+    <li <%= basket.item_count == 0 ? "class=disabled" : "" %>>
+      <a <%= basket.item_count == 0 ? "" : "href=#" %>>Checkout</a>
+    </li>
+  </ul>
+</li>

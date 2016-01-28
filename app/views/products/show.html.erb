@@ -39,6 +39,12 @@
               $<%= @product.price %>
             </div>
           </div>
+          <div class="col-lg-6 text-right">
+            <%= form_tag('/basket/items', remote: true) do %>
+              <%= hidden_field_tag(:product_id, @product.id) %>
+              <%= submit_tag "Add to cart", { class: "btn btn-lg btn-success"} %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

@@ -28,6 +28,9 @@ Rails.application.routes.draw do
 
   get 'products', to: 'products#index', as: 'products'
   get 'products/:id', to: 'products#show', as: 'product', constraints: { id: /\d+/ }
+  
+  post 'basket/items', to: 'basket_items#create', as: nil
+  delete 'basket/items/:product_id', to: 'basket_items#destroy', as: nil
 
   get '*slug', to: 'products#index'
 

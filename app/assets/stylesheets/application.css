@@ -5,3 +5,13 @@
  *= require_self
  *= require_tree .
 */
+.dropdown-menu>.basket_item,
+.dropdown-menu>.basket_item>div,
+.dropdown-menu>.basket_item>a {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.dropdown-menu>.basket_item {
+  padding: 3px 20px;
+}

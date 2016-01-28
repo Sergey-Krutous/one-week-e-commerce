@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Home", type: :request do
+RSpec.describe "Home requests", type: :request do
   describe "GET /" do
     it "application root URL responds with OK" do
       get root_path

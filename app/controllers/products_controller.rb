@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class ProductsController < EcommerceController
   before_action :set_product, only: [:show]
   before_action :check_invalid_product_id, only: [:show]
   before_action :set_category, only: [:index]

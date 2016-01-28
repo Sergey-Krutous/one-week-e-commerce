@@ -17,6 +17,7 @@
       <% end %>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <%= render partial: "shared/basket" %>
       <li>
         <% if current_user %>
           <%= link_to "Admin dashboard", admin_dashboard_path %>
