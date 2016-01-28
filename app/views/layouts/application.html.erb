@@ -10,6 +10,12 @@
   
 <nav class="navbar navbar-default">
   <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-left">
+      <%= menu_link "All products", products_path %>
+      <% Category.roots.each do |category| %>
+        <%= menu_category_link category %>
+      <% end %>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
         <% if current_user %>

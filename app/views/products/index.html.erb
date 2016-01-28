@@ -1,0 +1,42 @@
+<% @header = @category ? @category.title : "All products" %>
+<!-- Page Content -->
+<div class="container">
+
+<!-- Page Heading -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Our catalogue: 
+      <small><%= @header %></small>
+    </h1>
+  </div>
+</div>
+<!-- /.row -->
+
+<% for row_number in 0..((@products.count-1)/5) %>
+  <div class="row category-credit" style="margin-top:20px">
+    <% for product in @products.slice(row_number*5,5) %>
+      <div class="col-lg-2 col-md-4 col-xs-6 thumb ">
+        <div class="thumbnail">
+            <a href="<%= friendly_path_to(product) %>">
+              <%= image_tag product.images.count > 0 ? product.images[0].file_url.to_s : "http://placehold.it/750x450",
+             {class: "img-responsive", style: "max-height:100%;max-width:100%", alt: product.title, title: product.title} %>
+              <div class="wrapper">
+                <div class="caption post-content">
+                  <span><%= product.title %></span>
+                </div>
+              </div>
+            </a>
+            <div class="wrapper">
+              <div class="post-meta">
+                <div class="price">$<%= product.price %></div>
+              </div>
+            </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @products.count == 0 %>
+<h4>We are sorry, this catalogue section does not have any available products.</h4>
+<% end %>

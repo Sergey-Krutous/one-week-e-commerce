@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  get 'admin/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
-  
   get 'sessions/new' => 'sessions#new', as: "log_in"
   post 'sessions' => 'sessions#create'
   delete 'sessions' => 'sessions#destroy', as: "log_out"
-  
+
+  get 'admin/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
+
   namespace :admin do
     resources :categories
     
@@ -25,6 +25,11 @@ Rails.application.routes.draw do
     post 'products/:product_id/images', to: 'images#create', as: nil
     delete 'images/:id', to: 'images#destroy', as: 'image'
   end
+
+  get 'products', to: 'products#index', as: 'products'
+  get 'products/:id', to: 'products#show', as: 'product', constraints: { id: /\d+/ }
+
+  get '*slug', to: 'products#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

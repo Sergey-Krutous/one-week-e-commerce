@@ -1,0 +1,70 @@
+// Place all the styles related to the images controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+//product list page
+
+.category-credit .post-content {
+    text-align: left;
+}
+.category-credit .post-meta {
+    text-align: right;
+}
+.category-credit .post-content h4 {
+    font-weight: bold;
+    margin: 0;
+}
+.category-credit .post-meta .price {
+    font-weight: bold;
+    color: #4BB047;
+}
+.category-credit .post-content span {
+    font-weight: bold;
+    color: #6FCAEB;
+}
+
+//product detail page
+
+.product-detail-2 .vendor-feedback {
+    color: #A31C49;
+    font-weight: bold;
+}
+.product-detail-2 .product-price,
+.product-detail-2 h2,
+.product-detail-2 h3,
+.product-detail-2 .vendor-reject {
+    color: #0F960B;
+    font-weight: bold;
+}
+.product-detail-2 .vendor-logo img {
+    width: 100px;
+    height: 100px;
+}
+.product-detail-2 .vendor-logo {
+    margin: 13px 0;
+}
+.product-detail-2 .product-price {
+    font-size: 18px;
+}
+.product-detail-2 .product-price span {
+    font-weight: normal;
+}
+.product-detail-2 .btn-success {
+    background: #99CC00;
+    border: 1px solid #99CC00;
+}
+.product-detail-2 .carousel-inner{
+  width:100%;
+  max-height: 900px !important;
+}
+.product-detail-2 .product-description {
+    word-wrap: break-word;
+}
+
+.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .fa-chevron-left, .carousel-control .fa-chevron-right {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block;
+}
