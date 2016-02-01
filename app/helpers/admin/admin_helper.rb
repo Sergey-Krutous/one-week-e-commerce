@@ -7,6 +7,12 @@ module Admin::AdminHelper
     end
   end
   
+  def admin_menu_external_link link_name, link_path, fa_symbol
+    content_tag :li do
+      content_tag :a, (content_tag :i, "", class:"fa fa-#{fa_symbol} fa-fw") + " " + link_name.capitalize, { href: link_path}
+    end
+  end
+  
   def admin_link_to_new object_name, parameters=nil
     link_to 'New ' + object_name.capitalize, eval("new_admin_" + object_name.downcase + "_path(parameters)"), class: "btn btn-default"
   end

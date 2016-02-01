@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   delete 'sessions' => 'sessions#destroy', as: "log_out"
 
   get 'admin/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
+  get 'admin/preview', to: 'admin#preview', as: 'admin_preview'
 
   namespace :admin do
     resources :categories

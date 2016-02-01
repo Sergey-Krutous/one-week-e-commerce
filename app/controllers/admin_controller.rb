@@ -5,6 +5,9 @@ class AdminController < ApplicationController
   def dashboard
   end
   
+  def preview
+  end
+  
 private
   def require_login
     unless current_user

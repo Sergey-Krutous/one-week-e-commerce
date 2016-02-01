@@ -43,6 +43,9 @@
                         <%= admin_menu_internal_link "dashboard", params[:action]=="dashboard" %>
                         <%= admin_menu_internal_link "categories", controller_name=="categories", "folder-open-o" %>
                         <%= admin_menu_internal_link "products", controller_name=="products", "barcode" %>
+                        <%= admin_menu_internal_link "orders", controller_name=="orders", "list" %>
+                        <%= admin_menu_internal_link "preview", params[:action]=="preview", "play-circle-o" %>
+                        <%= admin_menu_external_link "web site", root_path, "photo" %>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
