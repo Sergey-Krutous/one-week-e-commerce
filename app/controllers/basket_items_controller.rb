@@ -6,6 +6,7 @@ class BasketItemsController < EcommerceController
     save_basket
     respond_to do |format|
       format.js { render :show }
+      format.html { redirect_to URI(request.referer).path }
     end
   end
 

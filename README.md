@@ -21,7 +21,11 @@ Carrierwave gem was selected as the second popular gem in "Rails File Uploads" s
 
 I was updating some of migrations given I was the only developer and could run `rake db:migrate:redo` or even `rake db:reset`. When working within a team the migrations should be incrementally added instead of modified. 
 
+Basket items controller was designed to accept AJAX requests (format=js) at the first place. However I encountered an issue with integration testing of "Add to cart" button in Selenium. It seemed like I needed to downgrade FireFox (http://stackoverflow.com/questions/7263564/unable-to-obtain-stable-firefox-connection-in-60-seconds-127-0-0-17055?rq=1). As it seemed to be a long way to fix and taking into account time constraints I chose to workaround the issue by additionally rendering for format=html. 
+
 ### Testing strategy
+
+Validation rules are tested with model tests
 
 Admin section of the application was tested with controller RSpec tests because:
 1) these tests are lighter than integration (request) tests
@@ -32,6 +36,20 @@ Routing tests are included into the test suite because:
 2) they ensure that controller actions can be routed to
 
 Helpers were not covered with tests because they provide very simple methods that would require tests duplicating helpers logic.
+
+Several integration tests (located at spec/features) were created to ensure end-to-end scenarios:
+1) products integration tests ensure that:
+ - product can be created with admin section of the application
+ - the product appears in the product list page (PLP) of the assigned category at the public section of the application
+ - the product detail page (PDP) can be opened by product id and product slug
+2) checkout integration tests ensure that:
+ - a product can be added to the basket from PDP opened by product id
+ - the product can be added to the basket from PDP opened by product slug
+ - the user can proceed to checkout with this basket
+ - and submit the order
+ - this order will be visible in the admin section of the application
+
+Integration tests cover mainly "sunny day" scenarios. Alternative scenarios are covered by model or controller tests.
 
 ## 1st priority TODOs (known issues):
 
