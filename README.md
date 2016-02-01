@@ -41,15 +41,15 @@ Helpers were not covered with tests because they provide very simple methods tha
 
 Several integration tests (located at spec/features) were created to ensure end-to-end scenarios:
 1. products integration tests ensure that:
- - product can be created with admin section of the application
- - the product appears in the product list page (PLP) of the assigned category at the public section of the application
- - the product detail page (PDP) can be opened by product id and product slug
+  - product can be created with admin section of the application
+  - the product appears in the product list page (PLP) of the assigned category at the public section of the application
+  - the product detail page (PDP) can be opened by product id and product slug
 2. checkout integration tests ensure that:
- - a product can be added to the basket from PDP opened by product id
- - the product can be added to the basket from PDP opened by product slug
- - the user can proceed to checkout with this basket
- - and submit the order
- - this order will be visible in the admin section of the application
+  - a product can be added to the basket from PDP opened by product id
+  - the product can be added to the basket from PDP opened by product slug
+  - the user can proceed to checkout with this basket
+  - and submit the order
+  - this order will be visible in the admin section of the application
 
 Integration tests cover mainly "sunny day" scenarios. Alternative scenarios are covered by model or controller tests.
 
