@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   
   post 'basket/items', to: 'basket_items#create', as: nil
   delete 'basket/items/:product_id', to: 'basket_items#destroy', as: nil
+  
+  resources :orders, only: [:new, :create, :show]
 
   get '*slug', to: 'products#index'
 

@@ -20,7 +20,7 @@
     <% end %>
     <li class="divider"></li>
     <li <%= basket.item_count == 0 ? "class=disabled" : "" %>>
-      <a <%= basket.item_count == 0 ? "" : "href=#" %>>Checkout</a>
+      <a <%= basket.item_count == 0 ? "" : "href=#{new_order_path}" %>>Checkout</a>
     </li>
   </ul>
 </li>

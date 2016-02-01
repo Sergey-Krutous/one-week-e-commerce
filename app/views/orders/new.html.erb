@@ -1,0 +1,106 @@
+<% @header="Checkout" %>
+
+<div class="container">
+  <h2 class="page-header"><%= @header %></h2>
+
+  <div class="col-md-12">
+    <%= form_for @order, url: {action: "create"}, html: {class: "form-horizontal"} do |order_form| %>
+      <div class="col-md-6">
+        <h2>Your Billing Address</h2>
+        <% if @order.billing_address.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@order.billing_address.errors.count, "Billing address error") %> prohibited this order from being saved:</h2>
+            <ul>
+              <% @order.billing_address.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= order_form.fields_for :billing_address, @order.billing_address do |billing_address_form| %>
+          <%= checkout_field billing_address_form, :first_name %>
+          <%= checkout_field billing_address_form, :last_name %>
+          <%= checkout_field billing_address_form, :email %>
+          <%= checkout_field billing_address_form, :country %>
+          <%= checkout_field billing_address_form, :city, "Town/City" %>
+          <%= checkout_field billing_address_form, :state %>
+          <%= checkout_field billing_address_form, :street_address %>
+          <%= checkout_field billing_address_form, :zip, "Zip/Post Code" %>
+        <% end %>
+
+        <label>
+          <input type="checkbox" name="same_shipping_address" value="1" <%= "checked=checked" if @same_shipping_address %>
+            onchange="$('#shipping_address_fields').toggle(!this.checked)">
+          My delivery address and personal details are the same.
+        </label>
+        <div id="shipping_address_fields" <%= "style=display:none" if @same_shipping_address%>>
+          <h2>Your Shipping Address</h2>
+          <% if !@same_shipping_address and @order.shipping_address.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@order.shipping_address.errors.count, "Shipping address error") %> prohibited this order from being saved:</h2>
+              <ul>
+                <% @order.shipping_address.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= order_form.fields_for :shipping_address, @order.shipping_address do |shipping_address_form| %>
+            <%= checkout_field shipping_address_form, :first_name %>
+            <%= checkout_field shipping_address_form, :last_name %>
+            <%= checkout_field shipping_address_form, :email %>
+            <%= checkout_field shipping_address_form, :country %>
+            <%= checkout_field shipping_address_form, :city, "Town/City" %>
+            <%= checkout_field shipping_address_form, :state %>
+            <%= checkout_field shipping_address_form, :street_address %>
+            <%= checkout_field shipping_address_form, :zip, "Zip/Post Code" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h2>Confirm Order</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <td class="name">Product Name</td>
+              <td class="quantity">Quantity</td>
+              <td class="price">Price</td>
+              <td class="total">Total</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% basket.items.each_index do |i| %>
+              <% item = basket.items[i] %>
+              <tr>
+                <td><a href="<%= friendly_path_to item.product %>"><%= item.product.title %></a>
+                </td>
+                <td><%= item.quantity %></td>
+                <td>$<%= '%.2f' % item.price %></td>
+                <td>$<%= '%.2f' % (item.price * item.quantity) %></td>
+              </tr>
+              <%= hidden_field_tag("order[order_lines][#{i}][product_id]", item.product_id) %>
+              <%= hidden_field_tag("order[order_lines][#{i}][price]", item.price) %>
+              <%= hidden_field_tag("order[order_lines][#{i}][quantity]", item.quantity) %>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="price"><b>Total:</b></td>
+              <td>$<%= '%.2f' % basket.total %></td>
+            </tr>
+          </tfoot>
+        </table>
+        <p style="text-align: right">
+          <%= submit_tag "Confirm Order", { class: "btn btn-lg btn-success"} %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+

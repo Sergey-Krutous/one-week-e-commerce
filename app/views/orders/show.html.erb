@@ -1,0 +1,58 @@
+<% @header="Order Confirmation" %>
+
+<div class="container">
+  <h2 class="page-header"><%= @header %></h2>
+  <h4><p class="text-success">Thank you for your order! Your order reference is #<i><b><%= @order.id %><b/></i></p></h4>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <h2>Your Billing Address</h2>
+      <% billing_address = @order.billing_address %>
+      <%= billing_address.first_name + " " + billing_address.last_name %><br/>
+      <%= billing_address.email %><br/>
+      <%= billing_address.country + (billing_address.state.blank? ? "" : ", " + billing_address.state) %><br/>
+      <%= billing_address.city + ", " + billing_address.street_address + ", " + billing_address.zip %>
+
+      <h2>Your Shipping Address</h2>
+      <% shipping_address = @order.shipping_address %>
+      <%= shipping_address.first_name + " " + shipping_address.last_name %><br/>
+      <%= shipping_address.email %><br/>
+      <%= shipping_address.country + (shipping_address.state.blank? ? "" : ", " + shipping_address.state) %><br/>
+      <%= shipping_address.city + ", " + shipping_address.street_address + ", " + shipping_address.zip %>
+    </div>
+    <div class="col-md-6">
+      <h2>Ordered Items</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <td class="name">Product Name</td>
+            <td class="quantity">Quantity</td>
+            <td class="price">Price</td>
+            <td class="total">Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% total = 0 %>
+          <% @order.order_lines.each do |item| %>
+            <% sum = item.price * item.quantity %>
+            <% total += sum %>
+            <tr>
+              <td><a href="<%= friendly_path_to item.product %>"><%= item.product.title %></a>
+              </td>
+              <td><%= item.quantity %></td>
+              <td>$<%= '%.2f' % item.price %></td>
+              <td>$<%= '%.2f' % sum %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="price"><b>Total:</b></td>
+            <td>$<%= '%.2f' % total %></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+
