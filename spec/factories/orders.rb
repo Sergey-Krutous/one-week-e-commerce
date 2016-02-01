@@ -17,7 +17,7 @@ FactoryGirl.define do
   trait :with_single_order_line do
     after(:create) do |order|
       bag = create(:womens_bag)
-      order.order_lines << create(:order_line, product_id: bag.id)
+      order.order_lines << build(:order_line)
     end
   end
   

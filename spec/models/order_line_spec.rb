@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe OrderLine, type: :model do
-  let(:valid_order_line) { FactoryGirl.build :order_line }
+  let(:valid_order_line) { FactoryGirl.build :order_line_with_order }
   it "has valid factory" do
-    expect(FactoryGirl.build :order_line).to be_valid
+    expect(valid_order_line).to be_valid
   end
   [:order, :product, :quantity, :price].each do |attribute|
     it "is invalid with empty #{attribute}" do

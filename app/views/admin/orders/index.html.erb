@@ -1,0 +1,24 @@
+<% @header = "Order list" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order #</th>
+      <th>Date</th>
+      <th>Customer Email</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.reverse.each do |order| %>
+      <tr>
+        <td><%= link_to order.id, admin_order_path(order) %> </td>
+        <td><%= order.date %> </td>
+        <td><%= order.billing_address.email %> </td>
+        <td>$<%= '%.2f' % order.order_lines.sum("price*quantity") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

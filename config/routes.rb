@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     get 'products/:product_id/images/new', to: 'images#new', as: 'new_image'
     post 'products/:product_id/images', to: 'images#create', as: nil
     delete 'images/:id', to: 'images#destroy', as: 'image'
+    
+    resources :orders, only: [:index, :show]
   end
 
   get 'products', to: 'products#index', as: 'products'
