@@ -7,7 +7,22 @@ This application was developed with Ruby version 2.2.1p85 (2015-02-26 revision 4
 
 ## How to setup the application
 
-Set admin login and password in SessionsController (ADMIN_LOGIN and ADMIN_PASS constants) to appropriate values. Do not check in the changed file to GitHub (or any other publicly available repository).
+1. Download the source code:
+
+`git clone https://github.com/Sergey-Krutous/one-week-e-commerce.git`
+
+2. Update the gems requred for the application:
+
+`bundle install`
+
+3. Upgrade DB schema:
+
+`rake db:migrate`
+
+4. Set admin login and password in SessionsController (ADMIN\_LOGIN and ADMIN\_PASS constants) to appropriate values. Do not check in the changed file to GitHub (or any other publicly available repository).
+5. Run Rails server:
+
+`rails server`
 
 ## How to test
 
